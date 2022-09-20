@@ -1,6 +1,7 @@
 package com.example.postman.controller;
 
 import com.example.postman.entity.EmployeeEntity;
+import com.example.postman.responseModel.ResponseEntity;
 import com.example.postman.service.EmployeeService;
 import com.example.postman.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class EmployeeController {
     @GetMapping("/getAllEmployees")
     public List<EmployeeEntity> getEmployees(){
         return employeeServiceImpl.getAll();
+    }
+
+    @GetMapping("/checkEmpId")
+    public ResponseEntity checkEmpId(@RequestParam String empId){
+        return employeeServiceImpl.checkEmpId(empId);
     }
 }
 

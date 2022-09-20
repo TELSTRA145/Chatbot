@@ -2,9 +2,9 @@ package com.example.postman.controller;
 
 import com.example.postman.entity.EmployeeQuestionnaireEntity;
 import com.example.postman.exception.APIFailureException;
-import com.example.postman.responseModel.QuestionnaireResponse;
+import com.example.postman.responseModel.QuestionnaireCompanyResponse;
+import com.example.postman.responseModel.QuestionnairePersonalResponse;
 import com.example.postman.service.EmpQuestionnaireService;
-import com.example.postman.service.EmpQuestionnaireServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +25,8 @@ public class EmpQuestionnaireController {
         return empQuestionnaireServiceImpl.create(employeeQuestionnaire);
     }
 
-    @PostMapping("/getAnswer")
-    public QuestionnaireResponse getAnswerByQuestion(@RequestParam String question) throws APIFailureException{
+    @GetMapping("/getPersonalAnswer")
+    public QuestionnaireCompanyResponse getAnswerByQuestion(@RequestParam String question) throws APIFailureException{
         System.out.println(question);
         if(question == null) {
             throw new APIFailureException("Question is empty");
@@ -35,8 +35,8 @@ public class EmpQuestionnaireController {
     }
 
     @GetMapping("/getAnswers")
-    public QuestionnaireResponse getAnswer(@RequestParam(required = true) String question,
-                                           @RequestParam(required = true) String empId) throws APIFailureException{
+    public QuestionnairePersonalResponse getAnswer(@RequestParam(required = true) String question,
+                                                   @RequestParam(required = true) String empId) throws APIFailureException{
         System.out.println(empId);
         if(empId == null){
             throw new APIFailureException("No Employee Id found");

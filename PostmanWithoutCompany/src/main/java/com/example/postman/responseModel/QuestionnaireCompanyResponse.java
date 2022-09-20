@@ -1,6 +1,6 @@
 package com.example.postman.responseModel;
 
-public class QuestionnaireResponse {
+public class QuestionnaireCompanyResponse {
 
     private String answer;
     private String description;

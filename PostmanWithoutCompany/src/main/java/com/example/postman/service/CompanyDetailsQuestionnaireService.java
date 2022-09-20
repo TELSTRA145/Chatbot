@@ -7,7 +7,7 @@ import com.example.postman.porterStemmer;
 import com.example.postman.stopWordsRemoval;
 import com.example.postman.repository.CompanyDetailsQuestionnaireRepository;
 import com.example.postman.repository.CompanyDetailsRepository;
-import com.example.postman.responseModel.QuestionnaireResponse;
+import com.example.postman.responseModel.QuestionnaireCompanyResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +33,8 @@ public class CompanyDetailsQuestionnaireService {
         companyQuestionnaireRepository.deleteById(id);
     }
 
-    public QuestionnaireResponse getAnswerByQuestion(String question) throws APIFailureException {
-        QuestionnaireResponse questionnaireResponse = new QuestionnaireResponse();
+    public QuestionnaireCompanyResponse getAnswerByQuestion(String question) throws APIFailureException {
+        QuestionnaireCompanyResponse questionnaireCompanyResponse = new QuestionnaireCompanyResponse();
         question = question.toLowerCase();
         String[] words = question.split(" ");
         stopWordsRemoval stpRemove = new stopWordsRemoval();
@@ -80,11 +80,11 @@ public class CompanyDetailsQuestionnaireService {
                 case "default":
                     throw new APIFailureException("Keyword not found");
             }
-            questionnaireResponse.setAnswer(res);
-            questionnaireResponse.setDescription(desc);
+            questionnaireCompanyResponse.setAnswer(res);
+            questionnaireCompanyResponse.setDescription(desc);
         }
 
-        return questionnaireResponse;
+        return questionnaireCompanyResponse;
     }
 
 

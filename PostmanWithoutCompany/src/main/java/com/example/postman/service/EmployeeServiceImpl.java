@@ -2,8 +2,10 @@ package com.example.postman.service;
 
 import com.example.postman.entity.EmployeeEntity;
 import com.example.postman.repository.EmployeeRepository;
+import com.example.postman.responseModel.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,6 +21,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public List<EmployeeEntity> getAll() {
          return employeeRepository.findAll();
+    }
+
+    @Override
+    public ResponseEntity checkEmpId(String empId) {
+        ResponseEntity responseEntity=new ResponseEntity();
+        EmployeeEntity employeeEntity = employeeRepository.searchByEmpId(empId);
+        String message = "Proceed..";
+        if(employeeEntity == null){
+            message = "Provided Employee Id is incorrect!!";
+        }
+        responseEntity.setResult(message);
+        return responseEntity;
     }
 
 }

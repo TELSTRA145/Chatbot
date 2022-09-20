@@ -2,13 +2,12 @@ package com.example.postman.controller;
 
 import com.example.postman.entity.CompanyDetailsQuestionnaire;
 import com.example.postman.exception.APIFailureException;
-import com.example.postman.responseModel.QuestionnaireResponse;
+import com.example.postman.responseModel.QuestionnaireCompanyResponse;
 import com.example.postman.service.CompanyDetailsQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -32,12 +31,12 @@ public class CompanyDetailsQuestionnaireController {
 
 
     @GetMapping("/getAnswer")
-    public QuestionnaireResponse getAnswerByQuestion(@RequestParam String question) throws APIFailureException{
+    public QuestionnaireCompanyResponse getAnswerByQuestion(@RequestParam String question) throws APIFailureException{
         System.out.println(question);
         if(question == null) {
             throw new APIFailureException("Question is empty");
         }
-        QuestionnaireResponse response = companyQuestionnaireService.getAnswerByQuestion(question);
+        QuestionnaireCompanyResponse response = companyQuestionnaireService.getAnswerByQuestion(question);
         return response;
     }
 

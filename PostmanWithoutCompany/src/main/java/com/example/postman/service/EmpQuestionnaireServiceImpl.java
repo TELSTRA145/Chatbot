@@ -10,7 +10,8 @@ import com.example.postman.repository.EmpIdRepository;
 import com.example.postman.repository.EmpQuestionnaireRepository;
 import com.example.postman.repository.EmployeeInputRepository;
 import com.example.postman.repository.EmployeeRepository;
-import com.example.postman.responseModel.QuestionnaireResponse;
+import com.example.postman.responseModel.QuestionnaireCompanyResponse;
+import com.example.postman.responseModel.QuestionnairePersonalResponse;
 import com.example.postman.stopWordsRemoval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,8 @@ public class EmpQuestionnaireServiceImpl implements EmpQuestionnaireService {
     }
 
 
-    public QuestionnaireResponse getAnswerByQuestion(String question) throws APIFailureException {
-        QuestionnaireResponse questionnaireResponse = new QuestionnaireResponse();
+    public QuestionnaireCompanyResponse getAnswerByQuestion(String question) throws APIFailureException {
+        QuestionnaireCompanyResponse questionnaireCompanyResponse = new QuestionnaireCompanyResponse();
         question = question.toLowerCase();
         String[] words = question.split(" ");
         stopWordsRemoval stpRemove = new stopWordsRemoval();
@@ -63,7 +64,7 @@ public class EmpQuestionnaireServiceImpl implements EmpQuestionnaireService {
             System.out.println(empId);
             EmployeeEntity employeeEntity = employeeRepository.searchByEmpId(empId);
             if (employeeEntity == null) {
-                questionnaireResponse.setAnswer("Please enter the correct Employee Id");
+                questionnaireCompanyResponse.setAnswer("Please enter the correct Employee Id");
             } else {
                 switch (kw) {
                     case "manager":
@@ -87,19 +88,19 @@ public class EmpQuestionnaireServiceImpl implements EmpQuestionnaireService {
                     case "default":
                         throw new APIFailureException("Keyword not found");
                 }
-                questionnaireResponse.setAnswer(res);
+                questionnaireCompanyResponse.setAnswer(res);
             }
         }
         /*if(res==null){
              questionnaireResponse.setAnswer("Please re-check your question!!");
              return questionnaireResponse;
         }*/
-        return questionnaireResponse;
+        return questionnaireCompanyResponse;
     }
 
     @Override
-    public QuestionnaireResponse getAnswer(String question, String empId) throws APIFailureException {
-        QuestionnaireResponse questionnaireResponse = new QuestionnaireResponse();
+    public QuestionnairePersonalResponse getAnswer(String question, String empId) throws APIFailureException {
+        QuestionnairePersonalResponse questionnairePersonalResponse = new QuestionnairePersonalResponse();
         String[] words = question.toLowerCase().split(" ");
         stopWordsRemoval stpRemove = new stopWordsRemoval();
         HashSet<String> cleanedWords = stpRemove.removeStopWord(words);
@@ -116,7 +117,7 @@ public class EmpQuestionnaireServiceImpl implements EmpQuestionnaireService {
             if (kw == null ) {
                 count+=1;
                 if(count == cleanedWords.size()){
-                    questionnaireResponse.setAnswer("Keyword not found in the entered question");
+                    questionnairePersonalResponse.setAnswer("Keyword not found in the entered question");
                 }
                 //throw new APIFailureException("Keyword not found in the entered question");
                 continue;
@@ -129,7 +130,7 @@ public class EmpQuestionnaireServiceImpl implements EmpQuestionnaireService {
             EmployeeEntity employeeEntity = employeeRepository.searchByEmpId(empId);
             System.out.println(employeeEntity);
             if (employeeEntity == null) {
-                questionnaireResponse.setAnswer("Please enter the correct Employee Id");
+                questionnairePersonalResponse.setAnswer("Please enter the correct Employee Id");
             } else {
                 switch (kw) {
                     case "manager":
@@ -154,14 +155,14 @@ public class EmpQuestionnaireServiceImpl implements EmpQuestionnaireService {
                         throw new APIFailureException("Keyword not found");
                 }
 
-                questionnaireResponse.setAnswer(res);
+                questionnairePersonalResponse.setAnswer(res);
             }
         }
         /*if(res==null){
              questionnaireResponse.setAnswer("Please re-check your question!!");
              return questionnaireResponse;
         }*/
-        return questionnaireResponse;
+        return questionnairePersonalResponse;
     }
 
 }
