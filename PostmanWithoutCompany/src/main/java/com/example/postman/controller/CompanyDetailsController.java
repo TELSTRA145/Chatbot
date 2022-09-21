@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
+@RequestMapping("company")
 public class CompanyDetailsController {
 
     @Autowired

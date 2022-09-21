@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @EnableAutoConfiguration
 @CrossOrigin("http://localhost:3000")
+@RequestMapping("employee")
 public class EmployeeInputController {
 
     @Autowired

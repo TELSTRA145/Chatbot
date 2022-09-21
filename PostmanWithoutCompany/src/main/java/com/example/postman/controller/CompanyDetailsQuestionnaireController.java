@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @EnableAutoConfiguration
 @CrossOrigin("http://localhost:3000")
+@RequestMapping("company")
 public class CompanyDetailsQuestionnaireController {
 
     @Autowired
