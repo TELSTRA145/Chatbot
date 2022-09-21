@@ -7,6 +7,5 @@ import com.example.postman.responseModel.QuestionnairePersonalResponse;
 
 public interface EmpQuestionnaireService {
     public EmployeeQuestionnaireEntity create(EmployeeQuestionnaireEntity questionnaireEntity) throws APIFailureException;
-    public QuestionnaireCompanyResponse getAnswerByQuestion(String question) throws APIFailureException;
-    public QuestionnairePersonalResponse getAnswer(String question, String empId) throws APIFailureException;
+        public QuestionnairePersonalResponse getAnswer(String question, String empId) throws APIFailureException;
 }

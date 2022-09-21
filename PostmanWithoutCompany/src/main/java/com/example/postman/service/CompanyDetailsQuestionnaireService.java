@@ -44,7 +44,7 @@ public class CompanyDetailsQuestionnaireService {
         String kw = "";
         List<String> rwList = new ArrayList<>();
         List<String> uList = new ArrayList<>();
-        String res = " ";
+        String res = "";
         String desc=" ";
         for (String str : cleanedWords) {
 
@@ -78,7 +78,11 @@ public class CompanyDetailsQuestionnaireService {
                     desc += "Welcome Video";
                     break;
                 case "default":
-                    throw new APIFailureException("Keyword not found");
+                    //res+=" The answer for the required message is not found";
+                    //throw new APIFailureException("Keyword not found");
+            }
+            if(res==""){
+                res+=" The answer for the required message is not found";
             }
             questionnaireCompanyResponse.setAnswer(res);
             questionnaireCompanyResponse.setDescription(desc);

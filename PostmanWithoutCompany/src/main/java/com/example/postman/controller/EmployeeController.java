@@ -1,6 +1,7 @@
 package com.example.postman.controller;
 
 import com.example.postman.entity.EmployeeEntity;
+import com.example.postman.exception.IncompleteDetailsProvided;
 import com.example.postman.responseModel.ResponseEntity;
 import com.example.postman.service.EmployeeService;
 import com.example.postman.service.EmployeeServiceImpl;
@@ -20,7 +21,12 @@ public class EmployeeController {
     private EmployeeService employeeServiceImpl;
 
     @PostMapping("/addEmployee")
-    public EmployeeEntity addEmployee(@RequestBody EmployeeEntity employeeEntity){
+    public EmployeeEntity addEmployee(@RequestBody EmployeeEntity employeeEntity) throws IncompleteDetailsProvided {
+        if(employeeEntity.getOnBoardingStatus()==null || employeeEntity.getChapterName()==null || employeeEntity.getManagerName()==null
+            || employeeEntity.getLocation()==null || employeeEntity.getEmpRole()==null || employeeEntity.getEmailId()==null
+            || employeeEntity.getEmpId()==null || employeeEntity.getEmpName()==null || employeeEntity.getNwaCode()==null ||employeeEntity.getPhone()==null){
+            throw new IncompleteDetailsProvided("Incomplete inputs are provided");
+        }
         System.out.println(employeeEntity);
         return employeeServiceImpl.saveEntity(employeeEntity);
     }
@@ -31,7 +37,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/checkEmpId")
-    public ResponseEntity checkEmpId(@RequestParam String empId){
+    public ResponseEntity checkEmpId(@RequestParam String empId) throws IncompleteDetailsProvided {
+        if(empId==null){
+            throw new IncompleteDetailsProvided("EmpId input is missing");
+        }
         return employeeServiceImpl.checkEmpId(empId);
     }
 }
