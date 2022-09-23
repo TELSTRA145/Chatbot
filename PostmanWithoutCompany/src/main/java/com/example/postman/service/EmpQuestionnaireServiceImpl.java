@@ -61,7 +61,7 @@ public class EmpQuestionnaireServiceImpl implements EmpQuestionnaireService {
                 count+=1;
                 if(count == cleanedWords.size()){
                     //questionnairePersonalResponse.setAnswer("Keyword not found in the entered question");
-                    res+="Keyword not found in the entered question";
+                    res+="Please re-check the entered question";
                 }
                 //throw new APIFailureException("Keyword not found in the entered question");
                 continue;
