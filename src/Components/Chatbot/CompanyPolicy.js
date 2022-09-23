@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import GetCompanyAnswer from '../ReactComponents/GetCompanyAnswer';
+import styles from './CompanyPolicy.module.css';
 
 class CompanyPolicy extends Component{
     render(){
         return(
-            <div>
+            <div className={styles}>
                  <form action="https://telstra.unily.com/" target="_blank">
                     <input  type="submit" value="Telstra Unily Website" />
                   </form>

@@ -1,14 +1,16 @@
 import React,{Component} from "react";
-import SimpleForm from "./Components/Chatbot/SimpleForm";
+import NewForm from "./Components/Chatbot/NewForm";
+import Form from "./Components/Chatbot/Form";
 
 class App extends Component {
   render(){
     return (
       <div className="App">
-        <SimpleForm/>
+        <Form/>
       </div>
     );
   }
 }
 
 export default App;
+ 
